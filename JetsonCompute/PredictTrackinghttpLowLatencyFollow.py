@@ -20,7 +20,7 @@ from PIL import Image
 import cv2
 #cap = cv2.VideoCapture(1);
 #cap = cv2.VideoCapture("rtsp://192.168.1.102:8554/")
-#stream=urllib.urlopen('http://192.168.1.102:8080/?action=stream') #RPi IP
+
 bytes=''
 
 # This is needed since the notebook is stored in the object_detection folder.
@@ -204,7 +204,7 @@ with detection_graph.as_default():
            #fout.close()
           
 	
-         #cv2.imshow('object detection', cv2.resize(image_np, (800,600)))
+       
          cv2.imshow('object detection', image_np)
          if cv2.waitKey(25) & 0xFF == ord('q'):
            cv2.destroyAllWindows()
