@@ -1,14 +1,15 @@
-#/home/pi/Projects/SharedFile
+#Servo camera control and Send message to arduino
+
 
 import serial, time
 import RPi.GPIO as GPIO
 import binascii
 
-GPIO.setmode(GPIO.BOARD)   #Ponemos la Raspberry en modo BOARD
+GPIO.setmode(GPIO.BOARD)   
 
-GPIO.setup(13,GPIO.OUT)    #Ponemos el pin 21 como salida
+GPIO.setup(13,GPIO.OUT)   
 
-p = GPIO.PWM(13,50)        #Ponemos el pin 21 en modo PWM y enviamos 50 pulsos por segundo
+p = GPIO.PWM(13,50)       
 
 p.start(7.5)
 
@@ -31,18 +32,16 @@ try:
   #arduino.write(data)
   if(data=='r' and duty < 10): #leer de fichero
    duty=duty+0.1
-   p.ChangeDutyCycle(duty)    #Enviamos un pulso del 4.5% para girar el servo hacia la izquierda  
-   #arduino.write('r')
+   p.ChangeDutyCycle(duty)
    print duty
-   time.sleep(2)  #pausa de medio segundo
+   time.sleep(2)  
 
   
   elif(data=='l' and duty > 5):
    duty=duty-0.1
-   p.ChangeDutyCycle(duty)    #Enviamos un pulso del 4.5% para girar el servo h$ 
-   #arduino.write('l') 
+   p.ChangeDutyCycle(duty)
    print duty
-   time.sleep(2)           #pausa de medio segundo
+   time.sleep(2)       
    
 	 
   if(duty >= 7 and  duty <=8):
@@ -59,7 +58,7 @@ try:
   if(data=='m'):
 	print "Step"
 
-except KeyboardInterrupt:         #Si el usuario pulsa CONTROL+C entonces...
- p.stop()                      #Detenemos el servo 
+except KeyboardInterrupt:         #CONTROL+C 
+ p.stop()                      
  GPIO.cleanup()    
  serial.Serial('/dev/ttyACM0', 115200).close()
